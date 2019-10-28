@@ -1,10 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  FlatList
+} from 'react-native';
 
-export default function App() {
+import NoteList from './components/NoteList';
+
+const App = () => {
+  const [message, setMessage] = React.useState('name')
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Hello {message}!</Text>
+      <TextInput
+        style={{
+          backgroundColor: "lightblue",
+          height: 40,
+          width: "80%"
+        }}
+        onChangeText={(text) => setMessage(text)}
+      />
+      <NoteList />
     </View>
   );
 }
@@ -12,8 +31,10 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'lightpink',
     alignItems: 'center',
     justifyContent: 'center',
   },
 });
+
+export default App;
