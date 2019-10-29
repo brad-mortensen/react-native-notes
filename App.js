@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  Alert,
-  Button,
+  TouchableOpacity,
   StyleSheet,
   SafeAreaView,
   Text,
@@ -12,22 +11,28 @@ import NoteList from './components/NoteList';
 import AddNoteForm from './components/AddNoteForm';
 
 const App = () => {
-  const [message, setMessage] = React.useState('name')
+  const [adding, setAdding] = useState(false);
+  const [refetch, setRefetch] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
         <Text style={styles.mainHeader}>React Native Notes</Text>
-        <Button
-          title="Add A Note"
-          onPress={() => Alert.alert('Simple Button pressed')}
-        />
+        <TouchableOpacity
+          onPress={() => setAdding(!adding)}
+        >
+          <Text
+            style={styles.addNote}
+          >
+            {!adding ? 'Add a Note' : 'Close'}
+          </Text>
+        </TouchableOpacity>
       </View>
-      <AddNoteForm />
-      <NoteList />
+      {adding && <AddNoteForm setAdding={setAdding} refetch={refetch} setRefetch={setRefetch} />}
+      <NoteList refetch={refetch} />
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -36,19 +41,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  topContainer:{
+  topContainer: {
     justifyContent: 'center',
-    height:80,
-    textTransform: 'uppercase'
+    height: 80,
   },
-  mainHeader:{
+  mainHeader: {
     fontSize: 36,
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    marginBottom: 10,
+    marginTop: 30,
   },
   inputView: {
     flex: 1,
     borderColor: 'blue'
-  }
+  },
+  addNote: {
+    fontSize: 30,
+    color: 'darkslategray',
+    textAlign: 'center',
+    paddingBottom: 20
+  },
 });
 
 export default App;

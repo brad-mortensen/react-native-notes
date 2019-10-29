@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
-  View,
-  TextInput,
   FlatList
 } from 'react-native';
 
 import Note from './Note';
 
-const NoteList = () => {
+const NoteList = ({ refetch }) => {
   const [notes, setNotes] = useState([]);
 
   const fetchNotes = async () => {
@@ -21,7 +19,8 @@ const NoteList = () => {
     fetchNotes()
       .then(data => setNotes(data))
       .catch(err => console.error(`Error getting Notes: ${err}`))
-  }, [])
+    console.log('fetching')
+  }, [refetch]);
 
   return (
     notes ?
@@ -42,11 +41,7 @@ const NoteList = () => {
 };
 const styles = StyleSheet.create({
   noteList: {
-    flex: 1,
     width: '100%',
-    borderWidth: 1,
-    borderColor: 'black',
-    borderStyle: 'solid',
   },
 })
 export default NoteList;

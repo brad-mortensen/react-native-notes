@@ -5,8 +5,8 @@ import { Alert, StyleSheet, TouchableOpacity, Text } from 'react-native';
 const Note = ({ title, textBody }) => {
   const openAlert = () => {
     Alert.alert(
-      'Choose Action',
-      'My Alert Msg',
+      title,
+      textBody,
       [
         { text: 'Edit', onPress: () => console.log('Edit pressed') },
         {
@@ -18,33 +18,35 @@ const Note = ({ title, textBody }) => {
       ],
       { cancelable: false },
     );
-  }
+  };
+
   return (
     <TouchableOpacity style={styles.note} onPress={openAlert}>
       <Text style={styles.noteTitle}>{title}</Text>
-      <Text>{textBody}</Text>
+      <Text style={styles.noteBody}>{textBody}</Text>
     </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
   note: {
-    borderWidth: 1,
-    borderColor: 'black',
-    borderStyle: 'solid',
-    width: '80%',
-    height: 150,
+    width: '70%',
+    height: 'auto',
     alignSelf: 'center',
     padding: 10,
-    marginTop: 10
+    height: 150,
+    marginTop: 20,
+    backgroundColor: 'white'
   },
   noteTitle: {
     textAlign: 'center',
-    fontSize: 15,
-    fontWeight: 'bold'
+    fontSize: 24,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
   noteBody: {
-
+    fontSize: 18,
+    overflow: 'hidden'
   }
 })
 
