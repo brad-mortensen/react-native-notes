@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import NoteList from './components/NoteList';
+import AddNoteForm from './components/AddNoteForm';
 
 const App = () => {
   const [message, setMessage] = React.useState('name')
@@ -22,6 +23,7 @@ const App = () => {
           onPress={() => Alert.alert('Simple Button pressed')}
         />
       </View>
+      <AddNoteForm />
       <NoteList />
     </SafeAreaView>
   );
