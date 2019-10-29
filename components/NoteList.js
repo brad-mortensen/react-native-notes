@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,20 +7,7 @@ import {
 
 import Note from './Note';
 
-const NoteList = ({ refetch }) => {
-  const [notes, setNotes] = useState([]);
-
-  const fetchNotes = async () => {
-    const response = await fetch("https://lambda-notes-build.herokuapp.com/api/notes/");
-    const data = await response.json();
-    return data;
-  };
-  useEffect(() => {
-    fetchNotes()
-      .then(data => setNotes(data))
-      .catch(err => console.error(`Error getting Notes: ${err}`))
-    console.log('fetching')
-  }, [refetch]);
+const NoteList = ({ notes }) => {
 
   return (
     notes ?

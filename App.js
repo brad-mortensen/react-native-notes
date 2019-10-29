@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   TouchableOpacity,
   StyleSheet,
@@ -13,6 +13,19 @@ import AddNoteForm from './components/AddNoteForm';
 const App = () => {
   const [adding, setAdding] = useState(false);
   const [refetch, setRefetch] = useState(false);
+  const [notes, setNotes] = useState([]);
+
+  const fetchNotes = async () => {
+    const response = await fetch("https://lambda-notes-build.herokuapp.com/api/notes/");
+    const data = await response.json();
+    return data;
+  };
+  useEffect(() => {
+    fetchNotes()
+      .then(data => setNotes(data))
+      .catch(err => console.error(`Error getting Notes: ${err}`))
+    console.log('fetching')
+  }, [refetch]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -21,15 +34,13 @@ const App = () => {
         <TouchableOpacity
           onPress={() => setAdding(!adding)}
         >
-          <Text
-            style={styles.addNote}
-          >
+          <Text style={styles.addNote}>
             {!adding ? 'Add a Note' : 'Close'}
           </Text>
         </TouchableOpacity>
       </View>
       {adding && <AddNoteForm setAdding={setAdding} refetch={refetch} setRefetch={setRefetch} />}
-      <NoteList refetch={refetch} />
+      <NoteList refetch={refetch} notes={notes} />
     </SafeAreaView>
   );
 };
