@@ -1,10 +1,11 @@
 import React from 'react';
 import {
+  Alert,
+  Button,
   StyleSheet,
+  SafeAreaView,
   Text,
-  View,
-  TextInput,
-  FlatList
+  View
 } from 'react-native';
 
 import NoteList from './components/NoteList';
@@ -13,18 +14,16 @@ const App = () => {
   const [message, setMessage] = React.useState('name')
 
   return (
-    <View style={styles.container}>
-      <Text>Hello {message}!</Text>
-      <TextInput
-        style={{
-          backgroundColor: "lightblue",
-          height: 40,
-          width: "80%"
-        }}
-        onChangeText={(text) => setMessage(text)}
-      />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.topContainer}>
+        <Text style={styles.mainHeader}>React Native Notes</Text>
+        <Button
+          title="Add A Note"
+          onPress={() => Alert.alert('Simple Button pressed')}
+        />
+      </View>
       <NoteList />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -35,6 +34,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  topContainer:{
+    justifyContent: 'center',
+    height:80,
+    textTransform: 'uppercase'
+  },
+  mainHeader:{
+    fontSize: 36,
+    textTransform: 'uppercase'
+  },
+  inputView: {
+    flex: 1,
+    borderColor: 'blue'
+  }
 });
 
 export default App;

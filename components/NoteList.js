@@ -22,22 +22,31 @@ const NoteList = () => {
       .then(data => setNotes(data))
       .catch(err => console.error(`Error getting Notes: ${err}`))
   }, [])
-  console.log(notes)
+
   return (
-    notes ? 
-    <FlatList
-      data={notes}
-      renderItem={({ item }) => (
-        <Note
-          title={item.title}
-          textBody={item.textBody}
-        />
-      )}
-      keyExtractor={note => note.id.toString()}
-    />
-    :
-    <Text>No Notes</Text>
+    notes ?
+      <FlatList
+        data={notes}
+        renderItem={({ item }) => (
+          <Note
+            title={item.title}
+            textBody={item.textBody}
+          />
+        )}
+        keyExtractor={note => note.id.toString()}
+        style={styles.noteList}
+      />
+      :
+      <Text>No Notes</Text>
   )
 };
-
+const styles = StyleSheet.create({
+  noteList: {
+    flex: 1,
+    width: '100%',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderStyle: 'solid',
+  },
+})
 export default NoteList;
